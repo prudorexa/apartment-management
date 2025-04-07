@@ -1,118 +1,84 @@
 import { useState } from "react";
-import axios from "axios";
+import heroImage from "../assets/beach apartment.jpeg";
 
-const BookingForm = ({ apartmentId, apartmentName }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    agreementAccepted: false,
-  });
+const BookingPage = () => {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [formData, setFormData] = useState({ name: "", email: "", address: "", phone: "", notes: "" });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState("");
+  const timeSlots = ["8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM"];
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.agreementAccepted) {
-      setMessage("⚠ Please accept the rental agreement before booking.");
-      return;
-    }
-    setIsSubmitting(true);
-    try {
-      await axios.post("http://localhost:5000/api/bookings", {
-        ...formData,
-        apartmentId,
-      });
-      setMessage("✅ Booking request submitted successfully!");
-    } catch (error) {
-      console.error(error);
-      setMessage("❌ Error submitting booking request.");
-    }
-    setIsSubmitting(false);
+  const handleBooking = () => {
+    alert(`Booking confirmed for ${selectedDate} at ${selectedTime}`);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-8">
-      <div className="bg-gray-800 p-6 shadow-xl rounded-xl max-w-lg w-full">
-        <h3 className="text-3xl font-bold text-center text-green-500">
-          Request {apartmentName}
-        </h3>
-        <p className="text-gray-400 text-center mt-1">Fill in your details to book this apartment</p>
-
-        {message && <p className="text-center mt-3 text-sm">{message}</p>}
-
-        <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-          <div className="relative">
-            <input
-              type="text"
-              name="name"
-              required
-              className="peer w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:border-green-500 focus:ring focus:ring-green-300 outline-none"
-              placeholder=" "
-              onChange={handleChange}
-            />
-            <label className="absolute left-3 top-2.5 text-gray-400 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2.5 peer-focus:text-xs transition-all">
-              Full Name
-            </label>
-          </div>
-
-          <div className="relative">
-            <input
-              type="email"
-              name="email"
-              required
-              className="peer w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:border-green-500 focus:ring focus:ring-green-300 outline-none"
-              placeholder=" "
-              onChange={handleChange}
-            />
-            <label className="absolute left-3 top-2.5 text-gray-400 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2.5 peer-focus:text-xs transition-all">
-              Email Address
-            </label>
-          </div>
-
-          <div className="relative">
-            <input
-              type="tel"
-              name="phone"
-              required
-              className="peer w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:border-green-500 focus:ring focus:ring-green-300 outline-none"
-              placeholder=" "
-              onChange={handleChange}
-            />
-            <label className="absolute left-3 top-2.5 text-gray-400 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2.5 peer-focus:text-xs transition-all">
-              Phone Number
-            </label>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              name="agreementAccepted"
-              className="w-5 h-5 rounded-md accent-green-500 focus:ring-green-300 cursor-pointer"
-              onChange={handleChange}
-            />
-            <span className="text-sm text-gray-300">
-              I accept the <a href="#" className="text-green-400 hover:underline">rental agreement terms</a>.
-            </span>
-          </div>
-
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
+      {/* Hero Section */}
+      <div className="relative w-full max-w-6xl mb-12">
+        <img src={heroImage} alt="Booking" className="w-full h-[500px] object-cover rounded-lg" />
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center rounded-lg">
+          <h2 className="text-4xl font-bold">Book Your Appointment</h2>
           <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded-lg transition-all disabled:opacity-50"
+            onClick={() => document.getElementById("booking-form").scrollIntoView({ behavior: "smooth" })}
+            className="mt-4 bg-green-500 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-600"
           >
-            {isSubmitting ? "Submitting..." : "Submit Request"}
+            Book Now
           </button>
-        </form>
+        </div>
+      </div>
+
+      {/* Booking Section */}
+      <div className="flex flex-col md:flex-row gap-8 w-full max-w-6xl">
+        {/* Date & Time Selection Card */}
+        <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
+          <h3 className="text-2xl font-semibold mb-4">Select Date & Time</h3>
+          <label className="block mb-2 text-gray-300">Select Date:</label>
+          <input type="date" className="w-full p-2 rounded bg-gray-700 text-white" onChange={(e) => setSelectedDate(e.target.value)} />
+
+          <label className="block mt-4 mb-2 text-gray-300">Select Time:</label>
+          <div className="grid grid-cols-4 gap-2">
+            {timeSlots.map((time, index) => (
+              <button
+                key={index}
+                className={`p-2 rounded ${selectedTime === time ? "bg-green-500" : "bg-gray-700"}`}
+                onClick={() => setSelectedTime(time)}
+              >
+                {time}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Booking Form */}
+        <div id="booking-form" className="bg-gray-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
+          <h3 className="text-2xl font-semibold mb-4">Enter Your Details</h3>
+          <label className="block text-gray-300">Full Name:</label>
+          <input type="text" name="name" className="w-full p-2 rounded bg-gray-700 text-white" onChange={handleInputChange} />
+
+          <label className="block text-gray-300 mt-4">Email:</label>
+          <input type="email" name="email" className="w-full p-2 rounded bg-gray-700 text-white" onChange={handleInputChange} />
+
+          <label className="block text-gray-300 mt-4">Address:</label>
+          <input type="text" name="address" className="w-full p-2 rounded bg-gray-700 text-white" onChange={handleInputChange} />
+
+          <label className="block text-gray-300 mt-4">Phone Number:</label>
+          <input type="text" name="phone" className="w-full p-2 rounded bg-gray-700 text-white" onChange={handleInputChange} />
+
+          <label className="block text-gray-300 mt-4">Notes (Optional):</label>
+          <textarea name="notes" className="w-full p-2 rounded bg-gray-700 text-white" onChange={handleInputChange}></textarea>
+
+          <button onClick={handleBooking} className="mt-6 w-full bg-green-500 p-3 rounded font-semibold hover:bg-green-600">
+            Confirm Booking
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default BookingForm;
+export default BookingPage;

@@ -29,14 +29,14 @@ const Apartments = () => {
       name: "Oceanview Residences",
       description: "Coastal apartment with an ocean-facing balcony and serene surroundings.",
       price: 60000,
-      image: "https://source.unsplash.com/400x300/?beach,apartment",
+      image: "src/assets/beach apartment.jpeg",
     },
     {
       id: 5,
       name: "Royal Gardens",
       description: "Exclusive gated community with landscaped gardens and a swimming pool.",
       price: 75000,
-      image: "hsrc/assets/laxury-apartment.jpg",
+      image: "src/assets/laxury-apartment.jpg",
     },
     {
       id: 6,
@@ -50,21 +50,21 @@ const Apartments = () => {
       name: "Mountain View Apartments",
       description: "Cozy apartments with breathtaking views of the mountains and nature.",
       price: 32000,
-      image: "https://source.unsplash.com/400x300/?mountain,apartment",
+      image: "src/assets/mountain apartment.jpeg",
     },
     {
       id: 8,
       name: "Serene Meadows",
       description: "Tranquil and spacious apartments, perfect for families and retirees.",
       price: 45000,
-      image: "https://source.unsplash.com/400x300/?nature,house",
+      image: "src/assets/nature house.jpeg",
     },
     {
       id: 9,
       name: "Silvercrest Lofts",
       description: "Industrial-style lofts with modern finishes and open-concept living spaces.",
       price: 55000,
-      image: "https://source.unsplash.com/400x300/?loft,apartment",
+      image: "src/assets/loft apartment.jpeg",
     },
   ]);
 
