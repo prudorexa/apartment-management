@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar"; 
+
 
 const apartmentsData = [
   {
@@ -42,6 +44,7 @@ const ApartmentDetails = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
+      <Navbar />
       <h2 className="text-4xl font-bold text-center text-green-400 mb-6 mt-10">{apartment.name}</h2>
       <div className="flex flex-col md:flex-row gap-6">
         <div className="md:w-1/2">

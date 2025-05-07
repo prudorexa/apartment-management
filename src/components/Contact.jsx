@@ -1,8 +1,10 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaPhone } from "react-icons/fa";
+import Navbar from "../components/Navbar"; 
 
 const Contact = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-16 px-6">
+      <Navbar />
       <h1 className="text-4xl font-bold text-blue-400">Contact Us</h1>
       <p className="mt-2 text-gray-300">Get in touch with us for any inquiries or support.</p>
 

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import heroImage from "../assets/beach apartment.jpeg";
+import Navbar from "../components/Navbar"; 
+
 
 const BookingPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -18,6 +20,7 @@ const BookingPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
+      <Navbar />
       {/* Hero Section */}
       <div className="relative w-full max-w-6xl mb-12">
         <img src={heroImage} alt="Booking" className="w-full h-[500px] object-cover rounded-lg" />

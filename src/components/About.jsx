@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { FaBuilding, FaUsers, FaDollarSign, FaHeadset } from "react-icons/fa";
+import Navbar from "../components/Navbar"; 
+
 
 const AboutUs = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white py-12 px-6 md:px-20">
+      <Navbar />
       {/* Header Section */}
       <div className="text-center">
         <h1 className="text-4xl font-bold text-blue-500 mt-8">About Us</h1>

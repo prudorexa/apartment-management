@@ -22,9 +22,9 @@ const Navbar = () => {
           <li className="hover:text-blue-500 transition duration-300">
             <Link to="/about">About Us</Link>
           </li>
-          <li className="hover:text-green-500 transition duration-300">
+          {/* <li className="hover:text-green-500 transition duration-300">
             <Link to="/register">Register</Link>
-          </li>
+          </li> */}
           <li className="hover:text-yellow-500 transition duration-300">
             <Link to="/login">Login</Link>
           </li>
@@ -54,9 +54,9 @@ const Navbar = () => {
           <li>
             <Link to="/about" className="hover:text-blue-500" onClick={() => setIsOpen(false)}>About Us</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/register" className="hover:text-green-500" onClick={() => setIsOpen(false)}>Register</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/login" className="hover:text-yellow-500" onClick={() => setIsOpen(false)}>Login</Link>
           </li>

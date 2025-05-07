@@ -1,9 +1,12 @@
 import { FaBuilding, FaUsers, FaDollarSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar"; 
+
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      <Navbar />
       {/* Hero Section */}
       <div
         className="relative bg-cover bg-center h-[500px] flex flex-col justify-center items-center text-center px-6"

@@ -12,14 +12,26 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Attempting login with:", formData); // Debugging line
+
     try {
-      const res = await axios.post("http://localhost:5000/api/login", formData);
-      localStorage.setItem("token", res.data.token);
-      alert("Login successful!");
-      navigate("/dashboard"); // Redirect to dashboard
+      const res = await axios.post("http://localhost:5000/api/login", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.data && res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        alert("Login successful!");
+        navigate("/tenant-dashboard");
+      } else {
+        alert("Unexpected server response.");
+        console.error("Server response:", res.data);
+      }
     } catch (error) {
-      console.error(error.response.data);
-      alert("Invalid credentials");
+      console.error("Login error:", error.response?.data || error.message);
+      alert("Invalid credentials or server error.");
     }
   };
 
@@ -34,6 +46,7 @@ const Login = () => {
             type="email"
             name="email"
             placeholder="Email Address"
+            value={formData.email}
             onChange={handleChange}
             required
             className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -42,6 +55,7 @@ const Login = () => {
             type="password"
             name="password"
             placeholder="Password"
+            value={formData.password}
             onChange={handleChange}
             required
             className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"

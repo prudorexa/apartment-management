@@ -9,7 +9,7 @@ import Contact from "./components/Contact";
 import Apartments from './components/Apartments';
 import ApartmentDetails from './components/ApartmentDetails';
 import BookingForm from './components/BookingForm';
-// import TenantDashboard from "./TenantDashboard";
+import TenantDashboard from './components/TenantDashboard';
 // import LandlordDashboard from "./LandlordDashboard";
 // import PrivateRoute from "./PrivateRoute";
 import './index.css'
@@ -18,7 +18,7 @@ import './index.css'
 const App = () => {
   return (
     <Router>
-        <Navbar />
+      {/* <Navbar /> */}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
@@ -28,6 +28,7 @@ const App = () => {
           <Route path="/apartments" element={<Apartments />} />
           <Route path="/apartments/:id" element={<ApartmentDetails />} />
           <Route path="/booking-form" element={<BookingForm />} />
+          <Route path="/tenant-dashboard" element={<TenantDashboard />} />
 
         {/* Role-based protected routes */}
         {/* <Route path="/tenant-dashboard" element={<PrivateRoute allowedRoles={["tenant"]}><TenantDashboard /></PrivateRoute>} /> */}

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar"; 
+
 
 const Apartments = () => {
   const [apartments] = useState([
@@ -70,6 +72,7 @@ const Apartments = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
+      <Navbar />
       <h2 className="text-4xl font-bold text-center text-green-400 mb-8 mt-10">
         Available Apartments
       </h2>
