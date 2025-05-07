@@ -43,7 +43,7 @@ const TenantDashboard = () => {
     monthlyRent: '$1,200',
     paid: '$7,200',
     balance: '$4,800',
-  };
+  }; 
 
   return (
     <div className="flex h-screen bg-gray-100">
