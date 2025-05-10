@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaHome, FaMoneyBill, FaExchangeAlt, FaEnvelope, FaBell, FaSignOutAlt } from 'react-icons/fa';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import Calendar from 'react-calendar'
+import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const TenantDashboard = () => {
@@ -43,26 +43,32 @@ const TenantDashboard = () => {
     monthlyRent: '$1,200',
     paid: '$7,200',
     balance: '$4,800',
-  }; 
+  };
+
+  const menuItems = [
+    { id: 'home', icon: <FaHome className="mr-3" />, label: 'Home' },
+    { id: 'payment', icon: <FaMoneyBill className="mr-3" />, label: 'Payment' },
+    { id: 'transactions', icon: <FaExchangeAlt className="mr-3" />, label: 'Transactions' },
+    { id: 'messages', icon: <FaEnvelope className="mr-3" />, label: 'Messages' },
+  ];
 
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <div className="w-64 bg-white shadow-md flex flex-col">
         <div className="p-6 font-bold text-2xl text-green-600">Tenant Dashboard</div>
-        <nav className="flex-1">
-          <button onClick={() => setActiveSection('home')} className="flex items-center p-4 hover:bg-gray-200 w-full">
-            <FaHome className="mr-3" /> Home
-          </button>
-          <button onClick={() => setActiveSection('payment')} className="flex items-center p-4 hover:bg-gray-200 w-full">
-            <FaMoneyBill className="mr-3" /> Payment
-          </button>
-          <button onClick={() => setActiveSection('transactions')} className="flex items-center p-4 hover:bg-gray-200 w-full">
-            <FaExchangeAlt className="mr-3" /> Transactions
-          </button>
-          <button onClick={() => setActiveSection('messages')} className="flex items-center p-4 hover:bg-gray-200 w-full">
-            <FaEnvelope className="mr-3" /> Messages
-          </button>
+        <nav className="flex-1 space-y-1">
+          {menuItems.map(item => (
+            <button
+              key={item.id}
+              onClick={() => setActiveSection(item.id)}
+              className={`flex items-center p-4 w-full transition-colors duration-200 ${
+                activeSection === item.id ? 'bg-green-100 text-green-600 font-semibold' : 'hover:bg-gray-200'
+              }`}
+            >
+              {item.icon} {item.label}
+            </button>
+          ))}
         </nav>
       </div>
 
@@ -70,14 +76,17 @@ const TenantDashboard = () => {
       <div className="flex-1 flex flex-col">
         {/* Topbar */}
         <div className="flex justify-end items-center bg-white p-4 shadow">
-          <FaBell className="text-2xl text-gray-600 mr-6 cursor-pointer" />
+          <FaBell className="text-2xl text-gray-600 mr-6 cursor-pointer hover:text-green-600 transition" />
           <div className="relative">
-            <button onClick={() => setShowProfileDropdown(!showProfileDropdown)} className="flex items-center space-x-2">
+            <button
+              onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+              className="flex items-center space-x-2 focus:outline-none"
+            >
               <img src="https://i.pravatar.cc/40" alt="profile" className="rounded-full w-10 h-10" />
               <span className="font-semibold">{profileInfo.name}</span>
             </button>
             {showProfileDropdown && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded shadow-md p-4 z-10">
+              <div className="absolute right-0 mt-2 w-64 bg-white rounded shadow-md p-4 z-10 space-y-1 text-sm">
                 <p><strong>Name:</strong> {profileInfo.name}</p>
                 <p><strong>Move-in:</strong> {profileInfo.moveInDate}</p>
                 <p><strong>Due-date:</strong> {profileInfo.dueDate}</p>
@@ -95,17 +104,15 @@ const TenantDashboard = () => {
           </div>
         </div>
 
-        {/* Content based on section */}
+        {/* Section content */}
         <div className="p-6 overflow-y-auto flex-1">
           {activeSection === 'home' && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Calendar */}
               <div className="bg-white rounded-lg shadow p-4">
                 <h2 className="font-bold text-lg mb-4">Calendar</h2>
                 <Calendar onChange={setDate} value={date} />
               </div>
 
-              {/* Charts and Messages */}
               <div className="col-span-2 space-y-6">
                 <div className="bg-white rounded-lg shadow p-6">
                   <h2 className="font-bold text-lg mb-4">Transactions Overview</h2>
@@ -157,10 +164,10 @@ const TenantDashboard = () => {
               <h2 className="font-bold text-2xl mb-6">Payment Methods & Schedule</h2>
               <p className="mb-4">You can pay via Bank Transfer, Credit Card, or Mobile Money.</p>
               <p className="mb-4">Next Scheduled Payment: 1st of every month</p>
-              <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Download Receipt</button>
+              <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">Download Receipt</button>
               <div className="mt-6">
                 <h3 className="font-bold mb-2">Past Payments</h3>
-                <ul className="list-disc ml-6">
+                <ul className="list-disc ml-6 space-y-1">
                   <li>January 1, 2025 - $1200 - Paid</li>
                   <li>February 1, 2025 - $1200 - Paid</li>
                   <li>March 1, 2025 - $1200 - Pending</li>
@@ -173,7 +180,7 @@ const TenantDashboard = () => {
             <div className="bg-white p-6 rounded-lg shadow">
               <h2 className="font-bold text-2xl mb-6">Transactions</h2>
               <p>View all your payment transactions in detail here.</p>
-              {/* More detailed transaction history can go here */}
+              {/* Extend this with a table or list of transactions */}
             </div>
           )}
 
